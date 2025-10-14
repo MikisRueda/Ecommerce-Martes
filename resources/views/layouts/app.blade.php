@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,142 +15,171 @@
     <link href="https://fonts.bunny.net/css?family=Nunito:400,600,700" rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
-    <!-- Minimal dark overrides (no frameworks extra) -->
+    <!-- Tema oscuro blanco + naranja -->
     <style>
-        :root {
-            --bg-900: #0f172a; /* gris-azulado profundo */
-            --bg-850: #111827; /* gris oscuro */
-            --border-700: #374151;
-            --text-100: #e5e7eb;
-            --text-400: #9ca3af;
-            --indigo-600: #4f46e5;
-            --indigo-700: #4338ca;
-            --green-400: #34d399;
+        :root{
+            --bg-900:#0b0e16;           /* fondo base más neutro para resaltar el naranja */
+            --panel:#0e1322;            /* panel dark */
+            --border:#2a2f3d;           /* borde sutil */
+            --text-100:#ffffff;         /* blanco principal */
+            --text-400:#e9edf5;         /* blanco ligeramente atenuado */
+            --accent-500:#ff7a1a;       /* naranja base */
+            --accent-600:#ff6a00;       /* hover/focus */
+            --accent-700:#e65f00;       /* hover fuerte */
+            --ring-accent: rgba(255,122,26,.32); /* focus ring accesible */
         }
-        html, body { height: 100%; }
-        body {
-            background-color: var(--bg-900);
+
+        html, body { height:100% }
+        body{
+            background:
+                radial-gradient(1200px 800px at 10% -10%, rgba(255,122,26,.14), transparent 60%),
+                radial-gradient(900px 600px at 100% 10%, rgba(255,122,26,.12), transparent 55%),
+                var(--bg-900);
             color: var(--text-100);
-            font-family: 'Nunito', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+            font-family: 'Nunito', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
-        /* Navbar minimalista */
-        .navbar-dark {
-            --bs-navbar-color: rgba(229, 231, 235, 0.8);
-            --bs-navbar-hover-color: rgba(229, 231, 235, 1);
-            --bs-navbar-brand-color: #e5e7eb;
-            --bs-navbar-brand-hover-color: #fff;
+
+        /* Navbar transformada a dark + naranja */
+        .navbar{
+            background: rgba(14,19,34,.85) !important;
+            backdrop-filter: blur(8px) saturate(1.1);
+            border-bottom: 1px solid var(--border);
         }
-        .navbar-gradient-top {
-            position: relative;
+        .navbar::before{
+            content:""; position:absolute; inset:0 0 auto 0; height:2px;
+            background: linear-gradient(90deg, rgba(255,122,26,.85), rgba(255,122,26,.35), rgba(255,255,255,.45));
         }
-        .navbar-gradient-top::before {
-            content: "";
-            position: absolute;
-            inset: 0 0 auto 0;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(79,70,229,.6), rgba(79,70,229,.3), rgba(52,211,153,.5));
-            opacity: .9;
+        .navbar .navbar-brand,
+        .navbar .nav-link{
+            color: var(--text-100) !important;
         }
-        .navbar {
-            background-color: var(--bg-850) !important;
-            border-bottom: 1px solid var(--border-700);
+        .navbar .nav-link:hover{ color:#fff !important; }
+        .dropdown-menu{
+            background-color:#0e1322; border:1px solid var(--border); border-radius:12px; overflow:hidden;
         }
-        .nav-link, .navbar-brand { letter-spacing: .2px; }
-        .btn-cta {
-            background-color: var(--indigo-600);
-            border-color: var(--indigo-600);
+        .dropdown-item{ color:#fff; }
+        .dropdown-item:hover{ background:#131a2e; color:#fff; }
+
+        /* Contenido centrado */
+        main.app-center{
+            min-height: 100vh; display:flex; align-items:center; justify-content:center;
+            padding: 2rem 0;
         }
-        .btn-cta:hover {
-            background-color: var(--indigo-700);
-            border-color: var(--indigo-700);
+        .container-narrow{ max-width:1040px }
+
+        /* Panel glass con acento naranja */
+        .panel{
+            background: linear-gradient(180deg, rgba(14,19,34,.78), rgba(14,19,34,.94));
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(0,0,0,.35);
+            overflow: hidden;
         }
-        /* Dropdown oscuro */
-        .dropdown-menu {
-            background-color: #0b1220;
-            border: 1px solid var(--border-700);
+        .panel::before{
+            content:""; display:block; height:3px;
+            background: linear-gradient(90deg, rgba(255,122,26,.9), rgba(255,122,26,.45), rgba(255,255,255,.5));
         }
-        .dropdown-item {
-            color: var(--text-100);
+        .panel-body{ padding:1.25rem }
+        @media (min-width:768px){ .panel-body{ padding:1.75rem } }
+
+        /* Formularios oscuros con acento naranja */
+        .form-control, .form-select{
+            background-color:#0f162b; color:#fff; border-color:var(--border);
         }
-        .dropdown-item:hover {
-            background-color: #121a2b;
-            color: #fff;
+        .form-control:focus, .form-select:focus{
+            background-color:#111a31; color:#fff;
+            border-color: var(--accent-500);
+            box-shadow: 0 0 0 .22rem var(--ring-accent);
         }
-        /* Contenedor principal */
-        main {
-            padding-top: 2rem;
-            padding-bottom: 2rem;
+        .form-check-input{
+            background-color:#0f162b; border-color:var(--border);
         }
-        /* Links y focos */
-        a { color: var(--text-100); text-decoration: none; }
-        a:hover { color: #fff; }
-        .form-control, .form-select {
-            background-color: #0b1220;
-            color: var(--text-100);
-            border-color: var(--border-700);
+        .form-check-input:checked{
+            background-color: var(--accent-500); border-color: var(--accent-500);
         }
-        .form-control:focus, .form-select:focus {
-            background-color: #0d1628;
-            color: #fff;
-            border-color: var(--indigo-600);
-            box-shadow: 0 0 0 .25rem rgba(79,70,229,.2);
+        .invalid-feedback{ display:block }
+
+        /* Botón CTA naranja */
+        .btn-cta{
+            background-color: var(--accent-500);
+            border-color: var(--accent-500);
+            color:#0b0e16;
         }
-        .card {
-            background-color: #0b1220;
-            border: 1px solid var(--border-700);
-            color: var(--text-100);
+        .btn-cta:hover{
+            background-color: var(--accent-600);
+            border-color: var(--accent-600);
+            color:#0b0e16;
         }
-        .card-header {
-            border-bottom-color: var(--border-700);
+        .btn-cta:focus{
+            box-shadow: 0 0 0 .28rem var(--ring-accent);
         }
-        /* Utilidad sutil de separación */
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border-700), transparent);
+
+        /* Enlaces blancos con subrayado sutil */
+        a{ color:#fff; text-decoration:none }
+        a:hover{ color:#fff }
+        .link-underline-light{
+            color:#fff; text-decoration:none; border-bottom:1px solid transparent; padding-bottom:1px;
+        }
+        .link-underline-light:hover{ border-bottom-color: rgba(255,255,255,.5); }
+
+        /* Texto secundario (si lo necesitas) */
+        .muted{ color: var(--text-400) }
+
+        /* Separador sutil */
+        .section-divider{
+            height:1px; background: linear-gradient(90deg, transparent, var(--border), transparent);
             margin: 1rem 0;
+        }
+
+        /* Envoltorio de contenido típico para auth/forms */
+        .content-wrap{
+            width:100%; max-width:720px; margin:0 auto;
         }
     </style>
 </head>
+
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark navbar-gradient-top">
+        <!-- Navbar de Laravel UI adaptada a dark + naranja (mismo markup funcional) -->
+        <nav class="navbar navbar-expand-md position-sticky top-0 z-3">
             <div class="container">
                 <a class="navbar-brand fw-semibold" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon" style="filter: invert(1) brightness(2);"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side -->
-                    <ul class="navbar-nav me-auto">
-                        {{-- Espacio para enlaces públicos si los necesitas --}}
-                    </ul>
+                    <!-- Left -->
+                    <ul class="navbar-nav me-auto"></ul>
 
-                    <!-- Right Side -->
+                    <!-- Right -->
                     <ul class="navbar-nav ms-auto align-items-md-center">
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link px-3" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link px-2" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-
                             @if (Route::has('register'))
-                                <li class="nav-item ms-md-1 mt-2 mt-md-0">
+                                <li class="nav-item ms-md-2 mt-2 mt-md-0">
                                     <a class="btn btn-sm btn-cta px-3" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle px-3" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle px-2" href="#" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -166,11 +196,24 @@
             </div>
         </nav>
 
-        <main>
-            @yield('content')
+        <!-- Contenido centrado -->
+        <main class="app-center">
+            <div class="container container-narrow">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="content-wrap">
+                            @yield('content')
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
-    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+                crossorigin="anonymous"></script>
+    </div>
 </body>
+
 </html>
