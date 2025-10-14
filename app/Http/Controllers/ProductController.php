@@ -9,11 +9,11 @@ class ProductController extends Controller
     private $products = [
         1 => [
             'id' => 1,
-            'name' => 'Audífonos Bluetooth',
+            'name' => 'Airpods pro 2',
             'price' => 120,
             'image' => 'https://www.apple.com/v/airpods-pro/n/images/meta/og__eui2mpgzwyaa_overview.png',
             'category' => 'accesorios',
-            'description' => 'Audífonos inalámbricos con cancelación de ruido y batería de 24 horas.'
+            'description' => 'Audífonos inalámbricos con supresion de ruido y gran batería.'
         ],
         2 => [
             'id' => 2,
@@ -21,23 +21,23 @@ class ProductController extends Controller
             'price' => 250,
             'image' => 'https://mac-center.com/cdn/shop/files/IMG-14867089.jpg?v=1726874273&width=823',
             'category' => 'tecnologia',
-            'description' => 'Reloj inteligente con monitor de ritmo cardíaco, GPS y notificaciones.'
+            'description' => 'Reloj watch con diversas funciones de salud y conectividad.'
         ],
         3 => [
             'id' => 3,
-            'name' => 'Laptop Gamer',
+            'name' => 'Asus TUF Gaming',
             'price' => 3200,
-            'image' => 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8',
+            'image' => 'https://dlcdnwebimgs.asus.com/gain/3a36a12f-9a0d-488c-bef3-05431f041b96/',
             'category' => 'computadores',
-            'description' => 'PC Gamer con RTX 4080, Ryzen 9 y 32GB RAM. Ideal para gaming y streaming.'
+            'description' => 'PC Gamer con RTX 5080, Ryzen 9 y 16GB RAM.'
         ],
         4 => [
             'id' => 4,
-            'name' => 'Cámara Fotográfica',
+            'name' => 'Xbox Series X',
             'price' => 1800,
-            'image' => 'https://colombia.bioweb.co/cdn/shop/products/Sin_nombre_15e184ab-0f4e-4f28-bf65-d1f02d92cbf7.png?v=1754676513',
-            'category' => 'fotografia',
-            'description' => 'Cámara profesional con lente intercambiable y grabación 4K.'
+            'image' => 'https://cms-assets.xboxservices.com/assets/f0/8d/f08dfa50-f2ef-4873-bc8f-bcb6c34e48c0.png?n=642227_Hero-Gallery-0_C2_857x676.png',
+            'category' => 'tecnologia',
+            'description' => 'Consola de videojuegos 1TB de almacenamiento'
         ],
     ];
 

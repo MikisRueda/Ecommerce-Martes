@@ -6,7 +6,7 @@
     <title>@yield('title', 'Mi Tienda')</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="bg-gray-800 font-sans">
 
     {{-- Navbar --}}
     @include('Layouts.navbar')
