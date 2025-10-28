@@ -1,29 +1,41 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use Illuminate\Support\Facades\Auth;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Aquí registras tus rutas web para tu aplicación. Estas
-| rutas son cargadas por el RouteServiceProvider dentro del grupo
-| que contiene el middleware "web". ¡Crea algo grandioso!
-|
-*/
-
+Route::get('/', function () {
+    return redirect()->route('products.index');
+});
 
 Route::prefix('products')->controller(ProductController::class)->group(function () {
-    Route::get('/','index');
-    Route::get('/create', 'create');
-    Route::get('/{id}/{category?}','detail');
+    Route::get('/', 'index')->name('products.index');
+    Route::get('/create', 'create')->name('products.create');
+    Route::get('/{id}/{category?}', 'detail')->name('products.detail');
 });
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', [HomeController::class, 'welcome']);
+Route::prefix('admin')->controller(AdminController::class)->group(function () {
+    Route::get('/', 'index')->name('admin.index');
+});
+
+Route::prefix('admin/categories')->controller(CategoryController::class)->group(function () {
+    Route::get('/', 'create')->name('admin.categories.create');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
